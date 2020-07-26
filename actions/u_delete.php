@@ -1,9 +1,9 @@
 <?php 
 ob_start();
 session_start();
-require_once 'dbconnect.php';
+require_once '../dbconnect.php';
 
-if( !isset($_SESSION['admin']) ) {
+if( !isset($_SESSION['superadmin']) ) {
  header("Location: index.php");
  exit;
 }
@@ -11,14 +11,14 @@ if( isset($_SESSION['user']) ) {
     header("Location: home.php");
     exit;
    }
-$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['admin']);
+$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['superadmin']);
 $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 
 if ($_GET['id']) {
    $id = $_GET['id'];
 
-   $sql = "SELECT * FROM animals WHERE id = {$id}" ;
+   $sql = "SELECT * FROM users WHERE id = {$id}" ;
    $result = $conn->query($sql);
 
    $data = $result->fetch_assoc();
@@ -36,11 +36,11 @@ if ($_GET['id']) {
 <body>
 
 <h3>Do you really want to delete this entry?</h3>
-<form action ="actions/a_delete.php" method="post">
+<form action ="acc_delete.php" method="post">
 
    <input type="hidden" name= "id" value="<?php echo $data['id'] ?>"/>
    <button class="btn btn-outline-secondary" type="submit">Yes, delete it!</button>
-   <a href="admin.php"><button class="btn btn-outline-secondary" type="button">No!</button></a>
+   <a href="../superadmin.php"><button class="btn btn-outline-secondary" type="button">No!</button></a>
 </form>
 
 </body>

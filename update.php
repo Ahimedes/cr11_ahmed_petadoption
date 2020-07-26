@@ -11,7 +11,7 @@ if( isset($_SESSION['user']) ) {
     header("Location: home.php");
     exit;
    }
-$res=mysqli_query($conn, "SELECT * FROM users WHERE userId=".$_SESSION['admin']);
+$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['admin']);
 $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 
@@ -60,11 +60,11 @@ if ($_GET['id']) {
       <li class="nav-item">
         <a class="nav-link" href="create.php">Add Pet</a>
       </li>
-      <span class="my-2">
-        <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
-      </span>
     </ul>
   </div>
+  <span class="my-2">
+    <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
+  </span>
 </nav>
 
 <fieldset>
@@ -94,8 +94,8 @@ if ($_GET['id']) {
            </tr>
            <tr>
                <input type= "hidden" name= "id" value= "<?php echo $data['id']?>"/>
-               <td><button type= "submit">Save Changes</button></td>
-               <td><a href= "admin.php"><button type="button">Back</button></a></td>
+               <td><button class="btn btn-outline-secondary" type= "submit">Save Changes</button></td>
+               <td><a href= "admin.php"><button class="btn btn-outline-secondary" type="button">Back</button></a></td>
            </tr>
        </table>
    </form>

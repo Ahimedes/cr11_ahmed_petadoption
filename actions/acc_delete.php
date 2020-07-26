@@ -4,7 +4,7 @@ session_start();
 require_once '../dbconnect.php';
 
 
-if( !isset($_SESSION['admin']) ) {
+if( !isset($_SESSION['superadmin']) ) {
  header("Location: index.php");
  exit;
 }
@@ -16,10 +16,10 @@ if( isset($_SESSION['user']) ) {
 if ($_POST) {
    $id = $_POST['id'];
 
-   $sql = "DELETE FROM animals WHERE id = {$id}";
+   $sql = "DELETE FROM users WHERE id = {$id}";
     if($conn->query($sql) === TRUE) {
        echo "<p>Successfully deleted!!</p>" ;
-       echo "<a href='../admin.php'><button type='button'>Back</button></a>";
+       echo "<a href='../superadmin.php'><button type='button'>Back</button></a>";
    } else {
        echo "Error updating record : " . $conn->error;
    }

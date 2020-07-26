@@ -12,7 +12,7 @@ if( isset($_SESSION['user']) ) {
     header("Location: home.php");
     exit;
    }
-$res=mysqli_query($conn, "SELECT * FROM users WHERE userId=".$_SESSION['admin']);
+$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['admin']);
 $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -36,14 +36,15 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
       <li class="nav-item">
         <a class="nav-link" href="create.php">Add Pet</a>
       </li>
-      <span class="my-2">
-        <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
-      </span>
     </ul>
   </div>
+  <span class="my-2">
+    <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
+  </span>
 </nav>
 
-
+<div class="card">
+<div class="card-body ml-auto mr-auto" style="width:30%; margin-top:5vw">
 <fieldset>
    <legend>Add Pet</legend>
 
@@ -88,7 +89,10 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
        </table>
    </form>
 
-</fieldset >
+</fieldset>
+</div>
+</div>
+
 
 </body>
 </html>

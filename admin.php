@@ -4,7 +4,7 @@ session_start();
 require_once 'dbconnect.php';
 
 
-if( !isset($_SESSION['admin']) ) {
+if(!isset($_SESSION['admin']) ) {
  header("Location: index.php");
  exit;
 }
@@ -12,7 +12,11 @@ if( isset($_SESSION['user']) ) {
     header("Location: home.php");
     exit;
    }
-$res=mysqli_query($conn, "SELECT * FROM users WHERE userId=".$_SESSION['admin']);
+if( isset($_SESSION['superadmin']) ) {
+    header("Location: superadmin.php");
+    exit;
+   }
+$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['admin']);
 $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -35,11 +39,11 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
       <li class="nav-item">
         <a class="nav-link" href="create.php">Add Pet</a>
       </li>
-      <span class="my-2">
-        <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
-      </span>
     </ul>
   </div>
+  <span class="my-2">
+    <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
+  </span>
 </nav>
 
 <div class="container">
@@ -57,8 +61,8 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
                         <p>Age: " .$row['age']."</p>
                         <p>About: " .$row['animal_description']."</p>
                         <p>Hobbies: " .$row['hobbies']."</p>
-                        <a href='update.php?id=" .$row['id']."'><button type='button'>Edit</button></a>
-                    <a href='delete.php?id=" .$row['id']."'><button type='button'>Delete</button></a>
+                        <a href='update.php?id=" .$row['id']."'><button class='btn btn-outline-secondary' type='button'>Edit</button></a>
+                    <a href='delete.php?id=" .$row['id']."'><button class='btn btn-outline-secondary' type='button'>Delete</button></a>
                     </div>
                 </div>";
                 }

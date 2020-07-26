@@ -1,6 +1,18 @@
 <?php 
-
+ob_start();
+session_start();
 require_once '../dbconnect.php';
+
+
+if( !isset($_SESSION['admin']) ) {
+ header("Location: index.php");
+ exit;
+}
+if( isset($_SESSION['user']) ) {
+    header("Location: home.php");
+    exit;
+   }
+
 
 if ($_POST) {
    $animal_name = $_POST['animal_name'];

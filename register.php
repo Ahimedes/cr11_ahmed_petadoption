@@ -84,6 +84,8 @@ $password = hash('sha256' , $pass);
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
+<div class="card">
+<div class="card-body ml-auto mr-auto" style="width:30%; margin-top:10vw">
 <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"  autocomplete="off" >   
 
     <h2>Sign Up</h2>
@@ -114,12 +116,14 @@ $password = hash('sha256' , $pass);
      
     <hr/>
   
-    <button type ="submit" class = "btn btn-block btn-primary" name = "btn-signup">Sign Up</button>
+    <button type ="submit" class="btn btn-outline-secondary" name = "btn-signup">Sign Up</button>
     <hr/>
          
     <a href ="index.php">Sign in Here...</a>
    
 </form>
-</body >
-</html >
+</div>
+</div>
+</body>
+</html>
 <?php  ob_end_flush(); ?>

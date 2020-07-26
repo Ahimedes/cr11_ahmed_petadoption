@@ -4,11 +4,11 @@ session_start();
 require_once 'dbconnect.php';
 
 
-if( !isset($_SESSION['user']) ) {
+if(!isset($_SESSION['user']) ) {
  header("Location: index.php");
  exit;
 }
-$res=mysqli_query($conn, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
+$res=mysqli_query($conn, "SELECT * FROM users WHERE id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -34,11 +34,11 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
       <li class="nav-item">
         <a class="nav-link" href="senior.php">Senior animals</a>
       </li>
-      <span class="my-2">
-        <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
-      </span>
     </ul>
   </div>
+  <span class="my-2">
+    <a class="">Hi <?php echo $userRow['userName'] ; ?><a href="logout.php?logout"> Sign Out</a></a>
+  </span>
 </nav>
 
 <div class="container">

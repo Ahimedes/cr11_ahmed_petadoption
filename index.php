@@ -44,12 +44,15 @@ if(isset($_POST['btn-login']) ) {
  
   if( $count == 1 && $row['userPass']==$password ) {
    if ($row["status"] == 'admin'){
-       $_SESSION["admin"] = $row["userId"];
+       $_SESSION["admin"] = $row["id"];
        header("Location: admin.php");
+    } elseif ($row["status"] == 'superadmin') {
+        $_SESSION['superadmin'] = $row['id'];
+        header("Location: superadmin.php");
     } else {
-        $_SESSION['user'] = $row['userId'];
-        header("Location: home.php");
-   }
+    $_SESSION['user'] = $row['id'];
+    header("Location: home.php");
+    }
    
   } else {
    $errMSG = "Incorrect Credentials, Try again..." ;
@@ -66,7 +69,8 @@ if(isset($_POST['btn-login']) ) {
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="card">
+<div class="card-body ml-auto mr-auto" style="width:30%; margin-top:10vw">
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
  
     <h2>Sign In</h2>
@@ -88,7 +92,7 @@ if(isset($_POST['btn-login']) ) {
        
     <span class="text-danger"><?php echo $passError; ?></span>
     <hr/>
-    <button type="submit" name= "btn-login">Sign In</button>
+    <button class="btn btn-outline-secondary" type="submit" name= "btn-login">Sign In</button>
          
     <hr/>
  
